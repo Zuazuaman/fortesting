@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Informasi Perangkat</title>
+</head>
+<body>
+    <script>
+        document.write("<h2>Informasi Perangkat:</h2>");
+        document.write("<p><strong>Browser:</strong> " + navigator.userAgent + "</p>");
+        document.write("<p><strong>Sistem Operasi:</strong> " + navigator.platform + "</p>");
+
+        // Mendapatkan jenis perangkat
+        var deviceType = /Mobile|Tablet|iPad|iPhone|Android/.test(navigator.userAgent) ? "Mobile" : "Desktop";
+        document.write("<p><strong>Jenis Perangkat:</strong> " + deviceType + "</p>");
+
+        // Mendapatkan alamat IP
+        fetch('https://api64.ipify.org?format=json')
+            .then(response => response.json())
+            .then(data => {
+                document.write("<p><strong>Alamat IP (IPv4):</strong> " + data.ip + "</p>");
+            });
+
+        fetch('https://api64.ipify.org?format=json')
+            .then(response => response.json())
+            .then(data => {
+                document.write("<p><strong>Alamat IP (IPv6):</strong> " + data.ip + "</p>");
+            });
+
+        // Mengecek penggunaan VPN
+        document.write("<p><strong>VPN:</strong> " + (navigator.connection.effectiveType === "vpn" ? "Digunakan" : "Tidak Digunakan") + "</p>");
+
+        // Mengecek penggunaan Proxy
+        document.write("<p><strong>Proxy:</strong> " + (navigator.connection.proxy ? "Digunakan" : "Tidak Digunakan") + "</p>");
+
+        // Mengecek dukungan cookies
+        document.write("<p><strong>Dukungan Cookies:</strong> " + navigator.cookieEnabled + "</p>");
+
+        // Mengecek dukungan local storage
+        document.write("<p><strong>Local Storage:</strong> " + (typeof(Storage) !== "undefined" ? "Didukung" : "Tidak Didukung") + "</p>");
+
+        // Mengecek dukungan WebGL
+        document.write("<p><strong>WebGL:</strong> " + (window.WebGLRenderingContext ? "Didukung" : "Tidak Didukung") + "</p>");
+
+        // Mengecek dukungan websocket
+        document.write("<p><strong>WebSocket:</strong> " + (window.WebSocket ? "Didukung" : "Tidak Didukung") + "</p>");
+
+        // Mengecek dukungan socket
+        document.write("<p><strong>Socket:</strong> " + (typeof(WebSocket) !== "undefined" ? "Didukung" : "Tidak Didukung") + "</p>");
+
+        // Mengecek event sentuh
+        document.write("<p><strong>Event Sentuh:</strong> " + ("ontouchstart" in window || navigator.maxTouchPoints > 0 || navigator.msMaxTouchPoints > 0 ? "Didukung" : "Tidak Didukung") + "</p>");
+
+        // Mengecek dukungan geolokasi
+        if ("geolocation" in navigator) {
+            navigator.geolocation.getCurrentPosition(function(position) {
+                document.write("<p><strong>Geolokasi:</strong> Didukung (Latitude: " + position.coords.latitude + ", Longitude: " + position.coords.longitude + ")</p>");
+            }, function(error) {
+                document.write("<p><strong>Geolokasi:</strong> Tidak Didukung</p>");
+            });
+        } else {
+            document.write("<p><strong>Geolokasi:</strong> Tidak Didukung</p>");
+        }
+    </script>
+</body>
+</html>
