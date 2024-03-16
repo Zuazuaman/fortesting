@@ -16,19 +16,6 @@
         var deviceType = /Mobile|Tablet|iPad|iPhone|Android/.test(navigator.userAgent) ? "Mobile" : "Desktop";
         document.write("<p><strong>Jenis Perangkat:</strong> " + deviceType + "</p>");
 
-        // Mendapatkan alamat IP
-        fetch('https://api64.ipify.org?format=json')
-            .then(response => response.json())
-            .then(data => {
-                document.write("<p><strong>Alamat IP (IPv4):</strong> " + data.ip + "</p>");
-            });
-
-        fetch('https://api64.ipify.org?format=json')
-            .then(response => response.json())
-            .then(data => {
-                document.write("<p><strong>Alamat IP (IPv6):</strong> " + data.ip + "</p>");
-            });
-
         // Mengecek penggunaan VPN
         document.write("<p><strong>VPN:</strong> " + (navigator.connection.effectiveType === "vpn" ? "Digunakan" : "Tidak Digunakan") + "</p>");
 
